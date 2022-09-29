@@ -161,6 +161,169 @@
 //    }
 //}
 
+// TD3
+//int factorielle (int n){
+//    int res;
+//    if (n == 0) return res=1;
+//    else {
+//        res = n*factorielle(n-1);
+//        return res;
+//    }
+//}
+
+// E6.1-6.2
+//int main (){
+//    int i=5; int* j=&i;
+//    printf("%x,%d\n",&i,i);
+//    printf("%x,,%x,%d",&j,j,*j);
+//    i++;
+//}
+
+// E7.1
+//int main(){
+//    int a[10];
+//    for (int i = 0; i < 10; ++i) {
+//        a[i]=7;
+//    }
+//}
+
+// E7.2
+//int main(){
+//    int a[5]={4,3,2,1,0};
+//}
+
+// E7.3
+//int main(){
+//    int i=0;
+//    char chaine[]="bonjour";
+//    while (chaine[i]!='\0'){
+//        printf("%c",chaine[i]);
+//        i++;
+//    }
+//}
+
+// E7.4
+//int main(){
+//    int a=0,b=0;
+//    char chaine[10]={0};
+//    scanf("%s",chaine);
+//    for (int i = 0; i < 10; ++i) {
+//        if (chaine[i]=='o'&& a<1) {
+//            chaine[i] = 'a';
+//            a++;
+//        }
+//        else if (chaine[i]=='n'&& b<1){
+//            chaine[i] = 'd';
+//            b++;
+//        }
+//    }
+//    printf("%s",chaine);
+//}
+
+// E7.5-E7.6
+//int main(){
+//    int NMAX=5,sum=0,i=0,res=0;
+//    int a[NMAX];
+//    while (i<NMAX && a[i]!='\n') {
+//        scanf("%d",&a[i]);
+////        a[i] = getchar();
+//        sum = sum + a[i];
+//        i++;
+//    }
+//    res = sum/NMAX;
+//    i=0;
+//    while (i<NMAX && a[i]>=res) {
+//        printf("%d",a[i]);
+//        i++;
+//    }
+//    printf("%d",sum);
+//}
+
+// E7.7
+//int main(){
+//    int a[3][4]={12,13,14,15,16,17,18,19,20,21,22,23};
+//}
+
+// E8.1
+//void swap(int* a, int* b){
+//    int temp;
+//    temp=*a;
+//    *a=*b;
+//    *b=temp;
+//}
+//int main(){
+//    int a=2,b=10;
+//    swap(&a,&b);
+//    printf("%d,%d",a,b);
+//}
+
+// E8.2
+//int my_isascii(char c){
+//    if (c<=127 && c>=0) return 1;
+//    else return 0;
+//}
+//int main(){
+//    char c='[';
+//    int a;
+//    a = my_isascii(c);
+//    printf("%c\n",c);
+//    printf("%d",a);
+//}
+
+// E8.3
+//int my_strlen(char c[]){
+//    int i=0;
+//    while(c[i]!='\0'){
+//        i++;
+//    }
+//    return i;
+//}
+//int main(){
+//    char c[]="chansksa";
+//    int a;
+//    a = my_strlen(c);
+//    printf("%d",a);
+//}
+
+// E8.4
+//int function(int n){
+//    int MAX=10;
+//    int a[MAX];
+//    for (int i = 0; i < n; ++i) {
+//        scanf("%d",&a[i]);
+//    }
+//    return n;
+//}
+//int main(){
+//    int n;
+//    scanf("%d",&n);
+//    fflush(stdin);
+//    int a= function(n);
+//    printf("%d",a);
+//}
+
+// E8.5
+//int min(int a[],int n){
+//    int i=0,min=a[i];
+//    while(i<n && a[i]<=min) {
+//        min = a[i];
+//        i++;
+//    }
+//    return min;
+//}
+//int main(){
+//    int a[5]={5,4,3,2,2};
+//    printf("%d", min(a,5));
+//}
+
+// E8.8
+int main(int argc, char * argv[]){
+    while(--argc>0) {
+        printf("%s",*++argv);
+        printf("\n");
+    }
+    printf("sadasda");
+}
 
 // TP
 //int main (){
@@ -254,3 +417,4 @@
 //        scanf("%d",&list[i]);
 //    }
 //}
+
