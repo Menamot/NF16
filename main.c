@@ -317,13 +317,13 @@
 //}
 
 // E8.8
-int main(int argc, char * argv[]){
-    while(--argc>0) {
-        printf("%s",*++argv);
-        printf("\n");
-    }
-    printf("sadasda");
-}
+//int main(int argc, char * argv[]){
+//    while(--argc>0) {
+//        printf("%s",*++argv);
+//        printf("\n");
+//    }
+//    printf("sadasda");
+//}
 
 // TP
 //int main (){
@@ -418,3 +418,93 @@ int main(int argc, char * argv[]){
 //    }
 //}
 
+//TP2
+//E1.1-1.2
+//int fact1(int n){
+//    if (n!=1) { return n*fact1(n-1);}
+//    else { return 1;}
+//}
+//int fact2(int n){
+//    int fact=1;
+//    for (int i = 1; i <= n; ++i) {
+//        fact = fact*i;
+//    }
+//    return fact;
+//}
+//int main(){
+//    int a;
+//    a= fact2(4);
+//    printf("%d",a);
+//}
+
+//E1.3
+//int determinant(int** matrix, int N, int j){
+//    if (N!=2){
+//        for (int i = 0; i < N; ++i) {
+//            pow(-1,i+1) * *(*(matrix+i)+0) * determinant(**matrix,N-1,i);
+//        }
+//    }
+//    else {
+//        int smat[2][2];
+//        for (int i = 0; i < N; ++i) {
+//            if (i!=j){
+//                for (int k = 0; k <2 ; ++k) {
+//                    for (int l = 0; l <2 ; ++l) {
+//                        smat[k][l]=*(*(matrix+i+1)+i+2);
+//                    }
+//                }
+//            }
+//        }
+//        return smat[0][0]*smat[1][1]-smat[0][1]*smat[1][0];
+//    }
+//}
+//int main(){
+//    int martrix[3][3]={{1,2,3},{1,2,3},{1,2,3}};
+//
+//}
+
+//E1.4
+//int fibo1(int n){
+//    if (n>2) { return fibo1(n-1) + fibo1(n-2);}
+//    else {return 1;}
+//}
+//int fibo2(int n){
+//    if (n>2 && n%2==1){
+//        return pow(fibo2(n/2),2) + pow(fibo2(n/2 + 1),2);
+//    }
+//    else if (n>2 && n%2==0){
+//        return pow(fibo2(n/2),2) + 2* fibo2(n/2)* fibo2(n/2 - 1);
+//    }
+//    else { return 1 ;}
+//}
+//int main(){
+//    int a;
+//    a= fibo2(6);
+//    printf("%d",a);
+//}
+
+//E2
+//struct Un_Tableau_Entier{
+//    int ta[5];
+//    int ncase;
+//};
+//
+//struct menu{
+//    int n;
+//    char nom[20][60];
+//};
+//
+//typedef struct tonneau{
+//    float d,D,L;
+//    int type;
+//}Tonneau;
+//
+//float volum(Tonneau T){
+//    return 3.141592 * T.L * pow((T.d/2 + 2/3 * (T.D/2 - T.d/2)),2);
+//}
+//
+//
+//int test(int **a){
+//
+//}
+//int
