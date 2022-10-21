@@ -50,4 +50,17 @@ void remplirMatrice(matrice_creuse *m, int N, int M)
         }
     }
 }
+
+void afficherMatrice(matrice_creuse m){
+    for (int i = 0; i < m.nligne; ++i) {
+        liste_ligne now_node;
+        now_node = m.list[i];
+        for (int j = 0; j < m.ncolonne; ++j) {
+            if (now_node != NULL){
+                printf("%d",now_node->valeur);
+                now_node=now_node->ptr_next_element;
+            }
+        }
+    }
+}
 #endif //NF16_TP3_H
