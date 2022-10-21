@@ -15,7 +15,7 @@ element *creerElement(int colonne, int valeur) {
 
 
 void remplirMatrice(matrice_creuse *m, int N, int M) {
-
+    //使用此函数时必须传入的是一个实例对象的地址，不能是指针本身！！
     m->tab_lignes=(liste_ligne *)malloc(M*sizeof(liste_ligne));
     m->Ncolonnes=M;
     m->Nlignes=N;
