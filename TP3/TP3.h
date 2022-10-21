@@ -4,63 +4,32 @@
 
 #ifndef NF16_TP3_H
 #define NF16_TP3_H
-#include <stdlib.h>
-#include <stdio.h>
-typedef struct element
-{
-    int valeur;
-    int colonne;
-    struct element* ptr_next_element;
-}Element,*liste_ligne;
+struct Element {
+    int col;
+    int val;
+    struct Element *suivant;
+} ;
+typedef struct Element element;
 
-typedef struct matrice_creuse
-{
-    int nligne;
-    int ncolonne;
-    liste_ligne *list;
-}matrice_creuse;
 
-void remplirMatrice(matrice_creuse *m, int N, int M)
-{
-    m=(matrice_creuse *)malloc(sizeof(matrice_creuse));
-    m->list=(liste_ligne *)malloc(M*sizeof(liste_ligne));
-    m->ncolonne=M;
-    m->nligne=N;
-    for(int i=0;i<N;i++)
-    {
-        //m->list[]
-        liste_ligne temp=m->list[i];
-        for(int j=0;j<M;j++)
-        {
-            int input;
-            printf("Please enter %d line %d colonne data",i,j);
-            scanf("%d",&input);
-            if(input==0)
-            {
-                temp=NULL;
-                continue;
-            }
-            else if(input!=0)
-            {
-                temp=(Element *)malloc(sizeof(Element));
-                temp->valeur=input;
-                temp->colonne=j;
-                temp->ptr_next_element=NULL;
-            }
-        }
-    }
-}
+// TYPE LISTE_LIGNE
+typedef element *liste_ligne;
 
-void afficherMatrice(matrice_creuse m){
-    for (int i = 0; i < m.nligne; ++i) {
-        liste_ligne now_node;
-        now_node = m.list[i];
-        for (int j = 0; j < m.ncolonne; ++j) {
-            if (now_node != NULL){
-                printf("%d",now_node->valeur);
-                now_node=now_node->ptr_next_element;
-            }
-        }
-    }
-}
+
+// STRUCTURE MATRICE CREUSE
+struct MatriceCreuse {
+    int Nlignes;
+    int Ncolonnes;
+    liste_ligne *tab_lignes;
+} ;
+typedef struct MatriceCreuse matrice_creuse;
+
+
+void remplirMatrice(matrice_creuse *m, int N, int M);
+void afficherMatrice(matrice_creuse m);
+void afficherMatriceListes(matrice_creuse m);
+int rechercherValeur(matrice_creuse m, int i, int j);
+void affecterValeur(matrice_creuse m, int i, int j, int val);
+void additionerMatrices(matrice_creuse m1, matrice_creuse m2);
+int nombreOctetsGagnes(matrice_creuse m);
 #endif //NF16_TP3_H
