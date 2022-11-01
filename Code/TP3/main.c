@@ -80,6 +80,11 @@ int main() {
                 printf("matrix %d change:\n",z-1);
                 afficherMatrice(m[z-1]);
                 break;
+            case 7:
+                printf("enter the matrix you want to calculate, I print the number of bytes saved\n");
+                scanf("%d",&z);
+                printf("we saved %d bytes\n",nombreOctetsGagnes(m[z-1]));
+                break;
             case 8:
                 return 0;
         }
