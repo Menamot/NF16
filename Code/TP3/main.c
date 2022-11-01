@@ -93,6 +93,11 @@ int main() {
                 printf("we saved %d bytes\n",nombreOctetsGagnes(m[z-1]));
                 break;
             case 8:
+                printf("choose the matrix you want to erase:");
+                scanf("%d",&z);
+                destroy(&m[z-1]);
+                printf("the %d matrix has been erased.",z);
+            case 9:
                 return 0;
         }
         fflush(stdin);
