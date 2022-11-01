@@ -80,6 +80,13 @@ int main() {
                 printf("matrix %d change:\n",z-1);
                 afficherMatrice(m[z-1]);
                 break;
+            case 6:
+                printf("You choose add two matrix, enter the two matrixs you want to add\n");
+                scanf("%d%d",&z,&z2);
+                additionerMatrices(m[z-1],m[z2-1]);
+                printf("final:\n");
+                afficherMatrice(m[z-1]);
+                break;
             case 7:
                 printf("enter the matrix you want to calculate, I print the number of bytes saved\n");
                 scanf("%d",&z);
