@@ -127,9 +127,21 @@ void affecterValeur(matrice_creuse m, int i, int j, int val) { //复杂度O(j)
 
 
 void additionerMatrices(matrice_creuse m1, matrice_creuse m2) {
-
-    /*Ecrire ici le code de cette fonction*/
-
+   for (int i = 0; i < m1.Nlignes; ++i) {
+        liste_ligne now_node_1, now_node_2;
+        now_node_1 = m1.tab_lignes[i];
+        now_node_2 = m2.tab_lignes[i];
+        for (int j = 0; j < m1.Ncolonnes; ++j) {
+            if(now_node_1!=NULL && now_node_2!=NULL) { // 普通都有值情况
+                now_node_1->val = now_node_1->val + now_node_2->val;
+            }
+            if(now_node_1 == NULL && now_node_2!=NULL){ // 1矩阵一行空，二矩阵当前节点有值
+                now_node_1= creerElement(now_node_2->col,now_node_2->val);
+            }
+            now_node_1=now_node_1->suivant;
+            now_node_2=now_node_2->suivant;
+        }
+    }
 }
 
 
