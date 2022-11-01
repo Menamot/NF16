@@ -32,4 +32,5 @@ int rechercherValeur(matrice_creuse m, int i, int j);
 void affecterValeur(matrice_creuse m, int i, int j, int val);
 void additionerMatrices(matrice_creuse m1, matrice_creuse m2);
 int nombreOctetsGagnes(matrice_creuse m);
+void destroy(matrice_creuse *m);
 #endif //NF16_TP3_H
