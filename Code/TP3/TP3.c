@@ -26,7 +26,6 @@ void remplirMatrice(matrice_creuse *m, int N, int M) {
         for(int j=0;j<M;j++)
         {
             int input;
-//            printf("Please enter %d line %d colonne data",i,j);
             scanf("%d",&input);
             if(input==0)
             {
@@ -151,5 +150,16 @@ void additionerMatrices(matrice_creuse m1, matrice_creuse m2) {
 int nombreOctetsGagnes(matrice_creuse m) {
 
     /*Ecrire ici le code de cette fonction*/
-
+    //Calculer l'espace occupe par une matrice creuse
+    int resul=0;
+    int i=0;
+    for(liste_ligne temp1=m.tab_lignes[i];i<m.Nlignes;i++)
+    {
+        int NomDeEle=0;
+        for(liste_ligne temp2=temp1;temp2!=NULL;temp2=temp2->suivant)
+            NomDeEle++;
+        resul+=(int)(NomDeEle*sizeof(element));
+    }
+    resul=m.Nlignes*m.Ncolonnes*sizeof(int)-resul-sizeof(m.tab_lignes);
+    return resul;
 }
