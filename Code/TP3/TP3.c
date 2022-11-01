@@ -162,3 +162,21 @@ int nombreOctetsGagnes(matrice_creuse m) {
     resul=m.Nlignes*m.Ncolonnes*sizeof(int)-resul-sizeof(m.tab_lignes);
     return resul;
 }
+void destroy(matrice_creuse *m)
+{
+    for(int i=0;i<m->Nlignes;i++)
+    {
+        liste_ligne temphead=(m->tab_lignes[i]);
+        liste_ligne temp=NULL;
+        for(liste_ligne temp2=temphead;temp2!=NULL;temp2=temp)
+        {
+            temp=temp2->suivant;
+            free(temp2);
+        }
+
+        m->tab_lignes[i]=NULL;
+    }
+    free(m->tab_lignes);
+    m->Nlignes=0;
+    m->Ncolonnes=0;
+}
