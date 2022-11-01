@@ -26,7 +26,6 @@ void remplirMatrice(matrice_creuse *m, int N, int M) {
         for(int j=0;j<M;j++)
         {
             int input;
-            printf("Please enter %d line %d colonne data",i+1,j+1);
             scanf("%d",&input);
             if(input==0)
             {
