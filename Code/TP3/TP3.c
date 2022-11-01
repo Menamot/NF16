@@ -127,8 +127,7 @@ void affecterValeur(matrice_creuse m, int i, int j, int val) { //复杂度O(j)
 
 
 void additionerMatrices(matrice_creuse m1, matrice_creuse m2) {
-
-    for (int i = 0; i < m1.Nlignes; ++i) {
+   for (int i = 0; i < m1.Nlignes; ++i) {
         liste_ligne now_node_1, now_node_2;
         now_node_1 = m1.tab_lignes[i];
         now_node_2 = m2.tab_lignes[i];
@@ -143,7 +142,6 @@ void additionerMatrices(matrice_creuse m1, matrice_creuse m2) {
             now_node_2=now_node_2->suivant;
         }
     }
-
 }
 
 
