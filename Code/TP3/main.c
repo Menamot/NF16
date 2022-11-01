@@ -5,7 +5,7 @@
 #include "TP3.h"
 int main() {
     matrice_creuse m[5];
-    int input = 0,k=0,z=0,val;//k是为了当前输入的第几个矩阵，z是存储用户输入的矩阵
+    int input = 0,k=0,z=0,z2=0,val;//k是为了当前输入的第几个矩阵，z是存储用户输入的矩阵
     int N, M;
     printf("-----------------------------------------\n");
     printf("1. Remplir une matrice creuse\n"
