@@ -147,7 +147,7 @@ void additionerMatrices(matrice_creuse m1, matrice_creuse m2) {
 
 
 int nombreOctetsGagnes(matrice_creuse m) {
-
+    //这个函数在计算3x3矩阵时有问题，全0矩阵和有一个元素的矩阵节省空间数居然相同
     /*Ecrire ici le code de cette fonction*/
     //Calculer l'espace occupe par une matrice creuse
     int resul=0;
