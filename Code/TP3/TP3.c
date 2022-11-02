@@ -127,43 +127,47 @@ void affecterValeur(matrice_creuse m, int i, int j, int val) { //复杂度O(j)
 }
 
 
-void additionerMatrices(matrice_creuse m1, matrice_creuse m2) {
+void additionerMatrices(matrice_creuse m1, matrice_creuse m2) { // 用两个now_node分别代表两个矩阵的当前结点，理想情况将两个相同行和列的节点值相加即可
+    // 根据矩阵相加规则和矩阵的数据结构可知，我们只需要对1矩阵中有零元素的情况进行讨论，2矩阵中有零元素不用考虑，因为1矩阵中的元素加上0还是原来的元素
+    // 实际上，由于只有后驱指针，我们若想要实现1矩阵中第一行为(1, 0, 1)加上2矩阵(1, 1, 1)的情况，我们需要在1矩阵创建新的节点，并让这个节点的后驱指针指向相应的元素，因此我们只能通过对now_node.suivant进行操作
     for (int i = 0; i < m1.Nlignes; ++i) {
         liste_ligne now_node_1, now_node_2;
         now_node_1 = m1.tab_lignes[i];
         now_node_2 = m2.tab_lignes[i];
-        if(now_node_1!=NULL && now_node_2!=NULL && now_node_1->col>now_node_2->col) { // 矩阵1中第一个元素为空
+        // 为了对now_node.suivant进行操作，我们首先需要保证now_node不为空，也就是首先保证1矩阵的每一行的第一个节点不为空，一下三个if情况就是为了处理这种情况
+        if(now_node_1!=NULL && now_node_2!=NULL && now_node_1->col>now_node_2->col) { // 对应1矩阵为(0, 1, 1)，2矩阵为（1，1，1）情况
            m1.tab_lignes[i]= creerElement(now_node_2->col,now_node_2->val);
            m1.tab_lignes[i]->suivant=now_node_1;
            now_node_1 = m1.tab_lignes[i];
-        } else if(now_node_1 == NULL && now_node_2!=NULL){ // 1矩阵第一行行空，二矩阵当前节点有值
+        } else if(now_node_1 == NULL && now_node_2!=NULL){ // 1矩阵第一行行空，二矩阵当前节点有值，对应应1矩阵为(0, 0, 0)，2矩阵为（1，1，1）情况
             m1.tab_lignes[i]= creerElement(now_node_2->col,now_node_2->val);
             now_node_1 = m1.tab_lignes[i];
-        } else if (now_node_1!=NULL && now_node_2!=NULL &&now_node_1->col==now_node_2->col){
+        } else if (now_node_1!=NULL && now_node_2!=NULL &&now_node_1->col==now_node_2->col){ //对应普通情况
             now_node_1->val=now_node_1->val+now_node_2->val;
         }
+        // 下面对now_node.suivant进行操作，根据两个矩阵的now_node.suivant是否为空，一共有四种大情况
         for (int j = 0; j < m1.Ncolonnes; ++j) {
-            if(now_node_1!=NULL && now_node_2!=NULL){
+            if(now_node_1!=NULL && now_node_2!=NULL){ //防止两个矩阵的某一行都全为空的情况
                 if(now_node_1->suivant!=NULL){
                     if(now_node_2->suivant!=NULL){
-                        if(now_node_1->suivant->col==now_node_2->suivant->col){
+                        if(now_node_1->suivant->col==now_node_2->suivant->col){ // 最普通的两个结点的行列相同情况
                             now_node_1->suivant->val=now_node_1->suivant->val+now_node_2->suivant->val;
                             now_node_1=now_node_1->suivant;
                             now_node_2=now_node_2->suivant;
-                        } else if(now_node_1->suivant->col>now_node_2->suivant->col){
+                        } else if(now_node_1->suivant->col>now_node_2->suivant->col){ // 1矩阵的now_node.suivant的col大于2矩阵的，意味着1矩阵中当前节点和下一节点存在空值，所以需要在该空值处填充2矩阵的的当前节点
                             liste_ligne temp=now_node_1->suivant;
                             now_node_1->suivant= creerElement(now_node_2->suivant->col,now_node_2->suivant->val);
                             now_node_1->suivant->suivant=temp;
                             now_node_1=now_node_1->suivant;
                             now_node_2=now_node_2->suivant;
-                        } else if(now_node_1->suivant->col<now_node_2->suivant->col){
+                        } else if(now_node_1->suivant->col<now_node_2->suivant->col){ // 1矩阵的now_node.suivant的col小于2矩阵的，那么不用管，只让当前节点跳下一个
                             now_node_1=now_node_1->suivant;
                         }
-                    } else if(now_node_2->suivant==NULL){
+                    } else if(now_node_2->suivant==NULL){ // 2矩阵的now_node.suivant为空，意味着到了行的末尾，或者行的后面都是0，这种情况直接break跳出这一行的循环，进行下一行
                         break;
                     }
                 } else if(now_node_1->suivant==NULL){
-                    if(now_node_2->suivant!=NULL){
+                    if(now_node_2->suivant!=NULL){ //对应(1, 0, 0)加(1, 1, 1)情况
                         now_node_1->suivant= creerElement(now_node_2->suivant->col,now_node_2->suivant->val);
                         now_node_1=now_node_1->suivant;
                         now_node_2=now_node_2->suivant;
