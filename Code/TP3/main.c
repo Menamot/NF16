@@ -93,8 +93,8 @@ int main() {
                 printf("we saved %d bytes\n",nombreOctetsGagnes(m[z-1]));
                 break;
             case 8:
-                for(int i=0;i<=k;i++)
-                    destroy(&m[z-1]);
+                for(int i=0;i<=k-1;i++)
+                    destroy(&m[i]);
                 return 0;
         }
         fflush(stdin);
