@@ -84,7 +84,7 @@ int main() {
                 printf("You choose add two matrix, enter the two matrixs you want to add\n");
                 scanf("%d%d",&z,&z2);
                 additionerMatrices(m[z-1],m[z2-1]);
-                printf("final:\n");
+                printf("Matrix %d change ! Result:\n",z);
                 afficherMatrice(m[z-1]);
                 break;
             case 7:
