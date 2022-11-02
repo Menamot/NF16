@@ -109,6 +109,12 @@ void affecterValeur(matrice_creuse m, int i, int j, int val) { //复杂度O(j)
             m.tab_lignes[i-1] = creerElement(j-1,val);
             break;
         }
+        if (now_node->col>j-1 && k==0) { //一行全为0
+            liste_ligne temp=now_node;
+            m.tab_lignes[i-1] = creerElement(j-1,val);
+            m.tab_lignes[i-1]->suivant=temp;
+            break;
+        }
         if (now_node->col==(j-1)) {
             now_node->val=val;
             break;
@@ -123,9 +129,13 @@ void affecterValeur(matrice_creuse m, int i, int j, int val) { //复杂度O(j)
             now_node->suivant->suivant=temp;
             break;
         }
-        if(val==0 && rechercherValeur(m,i,j)!=0 &&now_node->col==(j-2)) {
-            if(now_node->suivant->suivant!=NULL){now_node->suivant=now_node->suivant->suivant;}
-            else{now_node->suivant=NULL;}
+        if(val==0 && rechercherValeur(m,i,j)!=0) {
+            if(now_node->suivant->col==(j-1)){
+                liste_ligne temp=now_node->suivant->suivant;
+                free(now_node->suivant);
+                now_node->suivant=temp;
+            }
+//            else{now_node->suivant=NULL;}
             break;
         }
         if (now_node != NULL) {now_node = now_node->suivant;}
