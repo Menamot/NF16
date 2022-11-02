@@ -54,20 +54,21 @@ void afficherMatrice(matrice_creuse m){ //复杂度O(N*M)
             for (int j = 0; j < m.Ncolonnes; ++j) {
                 printf("0 ");
             }
-        }
-        for (int j = 0; j < m.Ncolonnes; ++j) {
-            if (now_node != NULL){
-                if(now_node->col!=j) { //中间出0
-                    printf("0 ");
+        } else{
+            for (int j = 0; j < m.Ncolonnes; ++j) {
+                if (now_node != NULL){
+                    if(now_node->col!=j) { //中间出0
+                        printf("0 ");
+                    } else {
+                        printf("%d ",now_node->val);
+    //                    if((now_node->col==(m.Ncolonnes-2) && now_node->suivant == NULL)) { //一行结尾是0
+    //                        printf("0 ");
+    //                    }
+                        now_node=now_node->suivant;
+                    }
                 } else {
-                    printf("%d ",now_node->val);
-//                    if((now_node->col==(m.Ncolonnes-2) && now_node->suivant == NULL)) { //一行结尾是0
-//                        printf("0 ");
-//                    }
-                    now_node=now_node->suivant;
+                    printf("0 ");
                 }
-            } else {
-                printf("0 ");
             }
         }
         printf("\n");
@@ -142,31 +143,33 @@ void additionerMatrices(matrice_creuse m1, matrice_creuse m2) {
             now_node_1->val=now_node_1->val+now_node_2->val;
         }
         for (int j = 0; j < m1.Ncolonnes; ++j) {
-            if(now_node_1->suivant!=NULL){
-                if(now_node_2->suivant!=NULL){
-                    if(now_node_1->suivant->col==now_node_2->suivant->col){
-                        now_node_1->suivant->val=now_node_1->suivant->val+now_node_2->suivant->val;
-                        now_node_1=now_node_1->suivant;
-                        now_node_2=now_node_2->suivant;
-                    } else if(now_node_1->suivant->col>now_node_2->suivant->col){
-                        liste_ligne temp=now_node_1->suivant;
-                        now_node_1->suivant= creerElement(now_node_2->suivant->col,now_node_2->suivant->val);
-                        now_node_1->suivant->suivant=temp;
-                        now_node_1=now_node_1->suivant;
-                        now_node_2=now_node_2->suivant;
-                    } else if(now_node_1->suivant->col<now_node_2->suivant->col){
-                        now_node_1=now_node_1->suivant;
+            if(now_node_1!=NULL && now_node_2!=NULL){
+                if(now_node_1->suivant!=NULL){
+                    if(now_node_2->suivant!=NULL){
+                        if(now_node_1->suivant->col==now_node_2->suivant->col){
+                            now_node_1->suivant->val=now_node_1->suivant->val+now_node_2->suivant->val;
+                            now_node_1=now_node_1->suivant;
+                            now_node_2=now_node_2->suivant;
+                        } else if(now_node_1->suivant->col>now_node_2->suivant->col){
+                            liste_ligne temp=now_node_1->suivant;
+                            now_node_1->suivant= creerElement(now_node_2->suivant->col,now_node_2->suivant->val);
+                            now_node_1->suivant->suivant=temp;
+                            now_node_1=now_node_1->suivant;
+                            now_node_2=now_node_2->suivant;
+                        } else if(now_node_1->suivant->col<now_node_2->suivant->col){
+                            now_node_1=now_node_1->suivant;
+                        }
+                    } else if(now_node_2->suivant==NULL){
+                        break;
                     }
-                } else if(now_node_2->suivant==NULL){
-                    break;
-                }
-            } else if(now_node_1->suivant==NULL){
-                if(now_node_2->suivant!=NULL){
-                    now_node_1->suivant= creerElement(now_node_2->suivant->col,now_node_2->suivant->val);
-                    now_node_1=now_node_1->suivant;
-                    now_node_2=now_node_2->suivant;
-                } else if(now_node_2->suivant==NULL){
-                    break;
+                } else if(now_node_1->suivant==NULL){
+                    if(now_node_2->suivant!=NULL){
+                        now_node_1->suivant= creerElement(now_node_2->suivant->col,now_node_2->suivant->val);
+                        now_node_1=now_node_1->suivant;
+                        now_node_2=now_node_2->suivant;
+                    } else if(now_node_2->suivant==NULL){
+                        break;
+                    }
                 }
             }
         }
