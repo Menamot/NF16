@@ -77,7 +77,7 @@ int main() {
                 printf("Enter the value you want to give\n");
                 scanf("%d", &val);
                 affecterValeur(m[z-1],N,M,val);
-                printf("matrix %d change:\n",z-1);
+                printf("matrix %d change:\n",z);
                 afficherMatrice(m[z-1]);
                 break;
             case 6:
