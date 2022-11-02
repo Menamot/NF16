@@ -113,12 +113,12 @@ void affecterValeur(matrice_creuse m, int i, int j, int val) { //复杂度O(j)
             now_node->val=val;
             break;
         }
-        if (now_node->suivant== NULL && now_node->col==(j-2)) { //一行结尾为0
+        if (now_node->suivant== NULL) { //一行结尾为0
             now_node->suivant = creerElement(j-1,val);
             break;
         }
         if(val==0 && rechercherValeur(m,i,j)!=0 &&now_node->col==(j-2)) {
-            if(now_node->suivant->suivant!=NULL){now_node->suivant==now_node->suivant->suivant;}
+            if(now_node->suivant->suivant!=NULL){now_node->suivant=now_node->suivant->suivant;}
             else{now_node->suivant=NULL;}
             break;
         }
