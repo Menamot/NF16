@@ -19,48 +19,48 @@ int main() {
     while (1) {
         printf("-----------------------------------------\n");
         if( k!=0) {
-            printf("You now have %d matrix :\n",k);
+            printf("Maintenant tu as %d matrice(s) :\n",k);
             for (int i = 0; i < k; ++i) {
-                printf("matrix %d: %d * %d\n",i+1,m[i].Ncolonnes,m[i].Nlignes);
+                printf("matrice %d: %d * %d\n",i+1,m[i].Ncolonnes,m[i].Nlignes);
             }
         }
-        printf("Enter the function you want to choose:\n");
+        printf("Entre la fonction que vous voulez choisir:\n");
         scanf("%d", &input);
         getchar();
         switch (input) {
             case 1:
-                printf("You choose remplirMatrice, enter the number of row and list\n");
+                printf("Tu choisis remplirMatrice, entre le numéro de ligne et colonne\n");
                 scanf("%d %d", &N,&M);
-                if(N==0 || M == 0){ printf("incorrect enter !\n"); break;}
-                printf("Enter the values of the matrix\n");
+                if(N==0 || M == 0){ printf("entrée incorrecte !\n"); break;}
+                printf("Entre les valeur de cette matrice\n");
                 remplirMatrice(&m[k], N, M);
-                printf("Your matrix %d is:\n",k+1);
+                printf("Ta matrice %d est:\n",k+1);
                 afficherMatrice(m[k]);
                 k++;
                 break;
             case 2:
                 if(k==0) {
-                    printf("You haven't enter a matrix !\n");
+                    printf("Tu n'as pas saisi de matrice !\n");
                     break;
                 }
                 else {
-                    printf("You choose afficher matrix with table, enter the matrix you want to matrix\n");
+                    printf("Tu choisis d'afficher la matrice avec le tableau, entre la matrice que tu veux \n");
                     scanf("%d", &z);
-                    if(z<0 || z>k) { printf("There is no matrix %d\n",z); break;}
+                    if(z<0 || z>k) { printf("il n'y a pas cette matrice %d\n",z); break;}
                     afficherMatrice(m[z - 1]);
                     break;
                 }
             case 3:
-                printf("You choose afficher matrix with list, enter the matrix you want to matrix\n");
+                printf("Tu choisis d'afficher matrice avec une liste, entre la matrice que tu veux\n");
                 scanf("%d", &z);
-                if(z<0 || z>k) { printf("There is no matrix %d\n",z); break;}
+                if(z<0 || z>k) { printf("il n'y a pas cette matrice %d\n",z); break;}
                 afficherMatriceListes(m[z-1]);
                 break;
             case 4:
-                printf("You choose Donner la valeur, enter the matrix you want to change\n");
+                printf("Tu choisis Donner la valeur, entre la matrice que tu veux\n");
                 scanf("%d", &z);
-                if(z<0 || z>k) { printf("There is no matrix %d\n",z); break;}
-                printf("Enter the numbers of row and list\n");
+                if(z<0 || z>k) { printf("il n'y a pas cette matrice %d\n",z); break;}
+                printf("Entre le numéro de ligne et colonne\n");
                 fflush(stdin);
                 scanf("%d %d", &N,&M);
                 if (N>m[z-1].Nlignes || M>m[z-1].Ncolonnes){ printf("Your enter incorrect !\n"); break;}
