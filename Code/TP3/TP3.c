@@ -50,27 +50,30 @@ void afficherMatrice(matrice_creuse m){ //复杂度O(N*M)
     for (int i = 0; i < m.Nlignes; ++i) {
         liste_ligne now_node;
         now_node = m.tab_lignes[i];
-        if (now_node == NULL) { //一行全为0
+//        if (now_node == NULL) { //一行全为0
+//            for (int j = 0; j < m.Ncolonnes; ++j) {
+//                printf("0 ");
+//            }
+//        }
+//        else{
             for (int j = 0; j < m.Ncolonnes; ++j) {
-                printf("0 ");
-            }
-        } else{
-            for (int j = 0; j < m.Ncolonnes; ++j) {
-                if (now_node != NULL){
+                if (now_node != NULL)
+                {
                     if(now_node->col!=j) { //中间出0
                         printf("0 ");
-                    } else {
+                    }
+                    else
+                    {
                         printf("%d ",now_node->val);
-    //                    if((now_node->col==(m.Ncolonnes-2) && now_node->suivant == NULL)) { //一行结尾是0
-    //                        printf("0 ");
-    //                    }
                         now_node=now_node->suivant;
                     }
-                } else {
+                }
+                else
+                {
                     printf("0 ");
                 }
             }
-        }
+//        }
         printf("\n");
     }
 }
@@ -93,9 +96,10 @@ void afficherMatriceListes(matrice_creuse m) { //复杂度O(N*M)
 int rechercherValeur(matrice_creuse m, int i, int j) { //复杂度O(j)
     liste_ligne now_node;
     now_node = m.tab_lignes[i-1];
+    if(now_node==NULL){return 0;}
     while (1) {
         if (now_node->col==(j-1)) {return now_node->val;}
-        if (now_node->col>(j-1) || (now_node->col== (j-2) && now_node->suivant== NULL)) {return 0;}
+        if (now_node->col>(j-1) || (now_node->col<= (j-2) && now_node->suivant== NULL)) {return 0;} //遍历到想找的元素后面或者在前面但是后续为NULL
         now_node = now_node->suivant;
     }
 }
@@ -105,39 +109,42 @@ void affecterValeur(matrice_creuse m, int i, int j, int val) { //复杂度O(j)
     liste_ligne now_node;
     now_node = m.tab_lignes[i-1];
     for(int k=0;k<j;k++) {
+        if(val==0) {//val为0优先判断，后面的情况全是对赋值位置的限定，输入0为最高优先级
+            if(rechercherValeur(m,i,j)==0)//给0赋值0
+                break;
+            else if(now_node->suivant->col==(j-1)){
+                liste_ligne temp=now_node->suivant->suivant;
+                free(now_node->suivant);
+                now_node->suivant=temp;
+            }
+            break;
+        }
+
         if (now_node== NULL && k==0) { //一行全为0
             m.tab_lignes[i-1] = creerElement(j-1,val);
             break;
         }
-        if (now_node->col>j-1 && k==0) { //一行全为0
+        if (now_node->col>j-1 && k==0) { //一行开头为0
             liste_ligne temp=now_node;
             m.tab_lignes[i-1] = creerElement(j-1,val);
             m.tab_lignes[i-1]->suivant=temp;
-            break;
-        }
-        if (now_node->col==(j-1)) {
-            now_node->val=val;
             break;
         }
         if (now_node->suivant== NULL ) { //一行结尾为0
             now_node->suivant = creerElement(j-1,val);
             break;
         }
-        if(now_node->suivant!=NULL && now_node->suivant->col>j-1){
+        if(now_node->suivant!=NULL && now_node->suivant->col>j-1){ // 要赋值的元素为0且被2个非零元素夹着，因为没有后驱，所以要在遍历过去之前进行反应
             liste_ligne temp=now_node->suivant;
             now_node->suivant = creerElement(j-1, val);
             now_node->suivant->suivant=temp;
             break;
         }
-        if(val==0 && rechercherValeur(m,i,j)!=0) {
-            if(now_node->suivant->col==(j-1)){
-                liste_ligne temp=now_node->suivant->suivant;
-                free(now_node->suivant);
-                now_node->suivant=temp;
-            }
-//            else{now_node->suivant=NULL;}
+        if (now_node->col==(j-1)) { // 普通情况
+            now_node->val=val;
             break;
         }
+
         if (now_node != NULL) {now_node = now_node->suivant;}
     }
 }
