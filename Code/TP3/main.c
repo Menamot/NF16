@@ -83,6 +83,8 @@ int main() {
             case 6:
                 printf("You choose add two matrix, enter the two matrixs you want to add\n");
                 scanf("%d%d",&z,&z2);
+                if(m[z-1].Ncolonnes!=m[z-2].Ncolonnes || m[z-1].Nlignes!=m[z-2].Nlignes)
+                    printf("C'est impossible pour faire l'addition");
                 additionerMatrices(m[z-1],m[z2-1]);
                 printf("Matrix %d change ! Result:\n",z);
                 afficherMatrice(m[z-1]);

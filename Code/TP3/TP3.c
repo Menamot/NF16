@@ -50,12 +50,12 @@ void afficherMatrice(matrice_creuse m){ //复杂度O(N*M)
     for (int i = 0; i < m.Nlignes; ++i) {
         liste_ligne now_node;
         now_node = m.tab_lignes[i];
-//        if (now_node == NULL) { //一行全为0
-//            for (int j = 0; j < m.Ncolonnes; ++j) {
-//                printf("0 ");
-//            }
-//        }
-//        else{
+        if (now_node == NULL) { //一行全为0
+            for (int j = 0; j < m.Ncolonnes; ++j) {
+                printf("0 ");
+            }
+        }
+        else{
             for (int j = 0; j < m.Ncolonnes; ++j) {
                 if (now_node != NULL)
                 {
@@ -73,7 +73,7 @@ void afficherMatrice(matrice_creuse m){ //复杂度O(N*M)
                     printf("0 ");
                 }
             }
-//        }
+        }
         printf("\n");
     }
 }
@@ -109,17 +109,28 @@ void affecterValeur(matrice_creuse m, int i, int j, int val) { //复杂度O(j)
     liste_ligne now_node;
     now_node = m.tab_lignes[i-1];
     for(int k=0;k<j;k++) {
-        if(val==0) {//val为0优先判断，后面的情况全是对赋值位置的限定，输入0为最高优先级
-            if(rechercherValeur(m,i,j)==0)//给0赋值0
+        if(val==0 ) {//val为0优先判断，后面的情况全是对赋值位置的限定，输入0为最高优先级
+            if(rechercherValeur(m,i,j)==0) break;
+            else{
+                if(now_node->col==(j-1)){ //(0,1,1 情况)
+                    if(now_node->suivant!=NULL){
+                        liste_ligne temp=now_node->suivant;
+                        free(now_node);
+                        m.tab_lignes[i-1]=temp;
+                    }
+                    else m.tab_lignes[i-1]=NULL;
+                }else if(now_node->suivant->col==(j-1)){
+                    liste_ligne temp=now_node->suivant->suivant;
+                    free(now_node->suivant);
+                    now_node->suivant=temp;
+                }
                 break;
-            else if(now_node->suivant->col==(j-1)){
-                liste_ligne temp=now_node->suivant->suivant;
-                free(now_node->suivant);
-                now_node->suivant=temp;
             }
+        }
+        if (now_node->col==(j-1)) { // 普通情况
+            now_node->val=val;
             break;
         }
-
         if (now_node== NULL && k==0) { //一行全为0
             m.tab_lignes[i-1] = creerElement(j-1,val);
             break;
@@ -140,10 +151,7 @@ void affecterValeur(matrice_creuse m, int i, int j, int val) { //复杂度O(j)
             now_node->suivant->suivant=temp;
             break;
         }
-        if (now_node->col==(j-1)) { // 普通情况
-            now_node->val=val;
-            break;
-        }
+
 
         if (now_node != NULL) {now_node = now_node->suivant;}
     }
@@ -167,6 +175,10 @@ void additionerMatrices(matrice_creuse m1, matrice_creuse m2) { // 用两个now_
             now_node_1 = m1.tab_lignes[i];
         } else if (now_node_1!=NULL && now_node_2!=NULL &&now_node_1->col==now_node_2->col){ //对应普通情况
             now_node_1->val=now_node_1->val+now_node_2->val;
+        } else if (now_node_1!=NULL && now_node_2!=NULL && now_node_2->suivant==NULL){ //对应普通情况
+            m2.tab_lignes[i]= creerElement(0,0);
+            m2.tab_lignes[i]->suivant=now_node_2;
+            now_node_2=m2.tab_lignes[i];
         }
         // 下面对now_node.suivant进行操作，根据两个矩阵的now_node.suivant是否为空，一共有四种大情况
         for (int j = 0; j < m1.Ncolonnes; ++j) {
